@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzeria Castello — Oberhausen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;500;700&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a0f08;
+    --bg-warm: #2a1810;
+    --sand: #e8d5a8;
+    --sand-light: #f4e4c1;
+    --terracotta: #c4562a;
+    --saffron: #e8a52e;
+    --gold: #d4a44a;
+    --deep-red: #8b2318;
+    --ink: #1a0f08;
+    --cream: #f7ecd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Arabesque pattern overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(196, 86, 42, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(232, 165, 46, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Noise texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.5rem 2rem;
+    background: rgba(26, 15, 8, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 164, 74, 0.2);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: 'Italiana', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a:hover { color: var(--saffron); }
+
+  .nav-links a::after {
+    content: '❋';
+    position: absolute;
+    bottom: -20px; left: 50%;
+    transform: translateX(-50%) scale(0);
+    color: var(--saffron);
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+  }
+
+  .nav-links a:hover::after { transform: translateX(-50%) scale(1); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 8rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, var(--bg-warm) 0%, var(--bg) 70%);
+  }
+
+  /* Arabesque star pattern */
+  .arabesque {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    opacity: 0.12;
+    animation: rotate 60s linear infinite;
+  }
+
+  .arabesque-1 { top: -200px; right: -200px; }
+  .arabesque-2 { bottom: -200px; left: -200px; animation-direction: reverse; }
+
+  @keyframes rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-ornament {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    letter-spacing: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--saffron);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-title .and {
+    display: block;
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    font-size: 0.4em;
+    color: var(--gold);
+    margin: 0.3em 0;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .hero-divider-line {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-divider-ornament {
+    color: var(--gold);
+    font-size: 1.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.2rem;
+    color: var(--cream);
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 3rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+    z-index: -1;
+  }
+
+  .hero-cta:hover { color: var(--bg); }
+  .hero-cta:hover::before { transform: translateX(0); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section common */
+  section {
+    padding: 8rem 0;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .section-eyebrow {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--saffron);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-ornament {
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+  }
+
+  /* Story Section */
+  .story {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+    position: relative;
+  }
+
+  .story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--cream);
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .story-text .drop-cap::first-letter {
+    font-family: 'Italiana', serif;
+    font-size: 4rem;
+    float: left;
+    line-height: 0.8;
+    margin: 0.5rem 0.8rem 0 0;
+    color: var(--saffron);
+  }
+
+  .story-visual {
+    position: relative;
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(135deg, var(--terracotta), var(--deep-red));
+    border-radius: 200px 200px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+      0 0 60px rgba(196, 86, 42, 0.3),
+      inset 0 0 0 1px rgba(212, 164, 74, 0.3),
+      inset 0 0 0 8px var(--deep-red),
+      inset 0 0 0 10px var(--gold);
+  }
+
+  .story-visual::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(212, 164, 74, 0.4);
+    border-radius: 180px 180px 10px 10px;
+  }
+
+  .story-visual-inner {
+    text-align: center;
+    color: var(--sand-light);
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  .story-visual-inner .emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+
+  .story-visual-inner .year {
+    font-family: 'Italiana', serif;
+    font-size: 4rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .story-visual-inner .label {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+  }
+
+  /* Menu Section */
+  .menu {
+    background: var(--bg-warm);
+    position: relative;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem 5rem;
+  }
+
+  .menu-category {
+    position: relative;
+  }
+
+  .menu-category-title {
+    font-family: 'Italiana', serif;
+    font-size: 2rem;
+    color: var(--saffron);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .menu-category-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .menu-category-sub {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+  }
+
+  .menu-item {
+    padding: 1.2rem 0;
+    border-bottom: 1px dashed rgba(212, 164, 74, 0.2);
+    transition: padding-left 0.3s;
+  }
+
+  .menu-item:hover {
+    padding-left: 1rem;
+  }
+
+  .menu-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--cream);
+  }
+
+  .menu-item-dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(212, 164, 74, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .menu-item-price {
+    font-family: 'Italiana', serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  .menu-item-desc {
+    font-size: 0.95rem;
+    color: var(--cream);
+    opacity: 0.6;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .menu-note {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    border-top: 1px solid rgba(212, 164, 74, 0.2);
+    border-bottom: 1px solid rgba(212, 164, 74, 0.2);
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* Visit Section */
+  .visit {
+    background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+  }
+
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .visit-card {
+    padding: 3rem;
+    background: rgba(232, 165, 46, 0.04);
+    border: 1px solid rgba(212, 164, 74, 0.2);
+    position: relative;
+  }
+
+  .visit-card::before,
+  .visit-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--gold);
+  }
+
+  .visit-card::before {
+    top: -1px; left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .visit-card::after {
+    bottom: -1px; right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .visit-card-title {
+    font-family: 'Italiana', serif;
+    font-size: 1.8rem;
+    color: var(--saffron);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .visit-card-title .icon {
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed rgba(212, 164, 74, 0.15);
+    font-size: 1.1rem;
+  }
+
+  .hours-row:last-child { border-bottom: none; }
+
+  .hours-day { color: var(--cream); }
+  .hours-time { color: var(--gold); font-family: 'Italiana', serif; }
+  .hours-closed { color: var(--terracotta); font-style: italic; font-family: 'Amiri', serif; }
+
+  .contact-item {
+    padding: 1rem 0;
+    border-bottom: 1px dashed rgba(212, 164, 74, 0.15);
+  }
+
+  .contact-item:last-child { border-bottom: none; }
+
+  .contact-label {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--saffron);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-value {
+    color: var(--cream);
+    font-size: 1.15rem;
+  }
+
+  .contact-value a {
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-value a:hover { color: var(--saffron); }
+
+  /* Footer */
+  footer {
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+    background: var(--bg);
+    border-top: 1px solid rgba(212, 164, 74, 0.2);
+  }
+
+  .footer-ornament {
+    color: var(--gold);
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-name {
+    font-family: 'Italiana', serif;
+    font-size: 2rem;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-text {
+    font-family: 'Amiri', serif;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  .footer-copy {
+    font-size: 0.9rem;
+    color: var(--cream);
+    opacity: 0.4;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .story-content,
+    .menu-grid,
+    .visit-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .story-visual { max-width: 400px; margin: 0 auto; }
+    section { padding: 5rem 0; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { letter-spacing: 0; }
+    .hero-ornament { letter-spacing: 0.5rem; font-size: 1.5rem; }
+    .visit-card { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CASTELLO</div>
+  <ul class="nav-links">
+    <li><a href="#story">Geschichte</a></li>
+    <li><a href="#menu">Karte</a></li>
+    <li><a href="#visit">Besuch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Arabesque stars -->
+  <svg class="arabesque arabesque-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#d4a44a" stroke-width="0.5" fill="none">
+      <polygon points="100,20 115,70 165,70 125,100 140,150 100,120 60,150 75,100 35,70 85,70" />
+      <circle cx="100" cy="100" r="90" />
+      <circle cx="100" cy="100" r="60" />
+      <circle cx="100" cy="100" r="30" />
+      <g transform="translate(100,100)">
+        <g id="petal"><path d="M0,-80 Q15,-40 0,0 Q-15,-40 0,-80Z"/></g>
+        <use href="#petal" transform="rotate(45)"/>
+        <use href="#petal" transform="rotate(90)"/>
+        <use href="#petal" transform="rotate(135)"/>
+        <use href="#petal" transform="rotate(180)"/>
+        <use href="#petal" transform="rotate(225)"/>
+        <use href="#petal" transform="rotate(270)"/>
+        <use href="#petal" transform="rotate(315)"/>
+      </g>
+    </g>
+  </svg>
+
+  <svg class="arabesque arabesque-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#c4562a" stroke-width="0.5" fill="none">
+      <polygon points="100,20 115,70 165,70 125,100 140,150 100,120 60,150 75,100 35,70 85,70" />
+      <circle cx="100" cy="100" r="90" />
+      <polygon points="100,10 120,60 170,60 130,90 150,140 100,110 50,140 70,90 30,60 80,60" />
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-ornament">❋ ❋ ❋</div>
+    <p class="hero-subtitle">Oberhausen — Bahnhofstraße</p>
+    <h1 class="hero-title">
+      Pizzeria
+      <span class="and">&</span>
+      Castello
+    </h1>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-ornament">✦</span>
+      <div class="hero-divider-line"></div>
+    </div>
+    <p class="hero-tagline">
+      Wo das Feuer des Orients auf italienische Handwerkskunst trifft — ein Ort der Gastfreundschaft seit einer Weile.
+    </p>
+    <a href="#menu" class="hero-cta">Die Karte entdecken</a>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">~ Unsere Geschichte ~</div>
+      <h2 class="section-title">Ein kleines Königreich</h2>
+      <div class="section-ornament">❋ ✦ ❋</div>
+    </div>
+
+    <div class="story-content">
+      <div class="story-text">
+        <p class="drop-cap">
+          In der Bahnhofstraße 42 liegt ein kleines Stück Gastfreundschaft. Pizzeria Castello ist kein lauter Ort — sie ist ein Treffpunkt. Eine Nachbarschaftsküche, in der der Duft von frischem Teig, Oregano und sanftem Knoblauch in der Luft liegt.
+        </p>
+        <p>
+          Der Name erinnert an Burgen und Schlösser — an Orte, an denen Gäste seit Jahrhunderten bewirtet werden. Wir nehmen diese Tradition ernst und verbinden sie mit einer Prise mediterraner Wärme.
+        </p>
+        <p>
+          Von knusprigen Pizzen bis zu herzhaften Tellern — jedes Gericht ist mit Sorgfalt gemacht. Einfach, ehrlich, bezahlbar.
+        </p>
+      </div>
+
+      <div class="story-visual">
+        <div class="story-visual-inner">
+          <span class="emoji">🏰</span>
+          <div class="year">Castello</div>
+          <div class="label">~ Oberhausen ~</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">~ La Carta ~</div>
+      <h2 class="section-title">Unsere Speisen</h2>
+      <div class="section-ornament">❋ ✦ ❋</div>
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-category">
+        <h3 class="menu-category-title">Pizza Classica</h3>
+        <p class="menu-category-sub">~ Vom Steinofen ~</p>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Margherita</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">6,50 €</span>
+          </div>
+          <p class="menu-item-desc">Tomaten, Mozzarella, frisches Basilikum</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Salami</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">7,50 €</span>
+          </div>
+          <p class="menu-item-desc">Tomaten, Mozzarella, würzige Salami</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Funghi</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">7,50 €</span>
+          </div>
+          <p class="menu-item-desc">Tomaten, Mozzarella, frische Champignons</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Prosciutto</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">8,00 €</span>
+          </div>
+          <p class="menu-item-desc">Tomaten, Mozzarella, Vorderschinken</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Capricciosa</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">9,00 €</span>
+          </div>
+          <p class="menu-item-desc">Schinken, Pilze, Artischocken, Oliven</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Diavolo</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">8,50 €</span>
+          </div>
+          <p class="menu-item-desc">Scharfe Salami, Peperoni, frische Chili</p>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <h3 class="menu-category-title">Aus der Küche</h3>
+        <p class="menu-category-sub">~ Pasta & mehr ~</p>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Spaghetti Bolognese</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">7,50 €</span>
+          </div>
+          <p class="menu-item-desc">Hausgemachte Fleischsoße nach Tradition</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Penne Arrabiata</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">7,00 €</span>
+          </div>
+          <p class="menu-item-desc">Scharfe Tomatensoße mit Knoblauch & Chili</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Lasagne al Forno</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">8,50 €</span>
+          </div>
+          <p class="menu-item-desc">Mit Béchamel & kräftiger Fleischsoße</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Insalata Mista</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">5,00 €</span>
+          </div>
+          <p class="menu-item-desc">Gemischter Salat der Saison</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Bruschetta</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">4,50 €</span>
+          </div>
+          <p class="menu-item-desc">Geröstetes Brot mit Tomaten & Knoblauch</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Tiramisù</span>
+            <span class="menu-item-dots"></span>
+            <span class="menu-item-price">4,00 €</span>
+          </div>
+          <p class="menu-item-desc">Das klassische Dessert des Hauses</p>
+        </div>
+      </div>
+
+      <div class="menu-note">
+        ~ Preise sind Richtwerte · Alle Speisen auch zum Mitnehmen ~
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">~ Willkommen ~</div>
+      <h2 class="section-title">Besuchen Sie uns</h2>
+      <div class="section-ornament">❋ ✦ ❋</div>
+    </div>
+
+    <div class="visit-grid">
+
+      <div class="visit-card">
+        <h3 class="visit-card-title">
+          <span class="icon">✦</span>
+          Öffnungszeiten
+        </h3>
+
+        <div class="hours-row">
+          <span class="hours-day">Montag</span>
+          <span class="hours-time">11:30 — 22:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Dienstag</span>
+          <span class="hours-time">11:30 — 22:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Mittwoch</span>
+          <span class="hours-time">11:30 — 22:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Donnerstag</span>
+          <span class="hours-time">11:30 — 22:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Freitag</span>
+          <span class="hours-time">11:30 — 23:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Samstag</span>
+          <span class="hours-time">12:00 — 23:00</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sonntag</span>
+          <span class="hours-closed">Ruhetag</span>
+        </div>
+      </div>
+
+      <div class="visit-card">
+        <h3 class="visit-card-title">
+          <span class="icon">✦</span>
+          Kontakt & Adresse
+        </h3>
+
+        <div class="contact-item">
+          <div class="contact-label">Adresse</div>
+          <div class="contact-value">Bahnhofstraße 42<br>46145 Oberhausen</div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Telefon</div>
+          <div class="contact-value"><a href="tel:+492083859090">0208 38590901</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Reservierung</div>
+          <div class="contact-value">Einfach anrufen — wir freuen uns</div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Preis pro Person</div>
+          <div class="contact-value">1 — 10 €</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-ornament">❋ ✦ ❋ ✦ ❋</div>
+  <div class="footer-name">PIZZERIA CASTELLO</div>
+  <div class="footer-text">~ Mit Liebe gemacht ~</div>
+  <div class="footer-copy">© 2026 · Bahnhofstraße 42, 46145 Oberhausen</div>
+</footer>
+
+</body>
+</html>
