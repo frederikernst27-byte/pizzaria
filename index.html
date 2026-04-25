@@ -467,6 +467,21 @@
             white-space: nowrap;
         }
 
+        /* Pizza info box */
+        .pizza-info-box {
+            background: rgba(184,133,42,0.06);
+            border: 1px solid rgba(184,133,42,0.2);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.79rem;
+            color: var(--warm-gray);
+            line-height: 1.8;
+        }
+        .pizza-info-box strong {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
         /* Familienpizza box */
         .family-deal {
             background: var(--dark);
@@ -498,6 +513,15 @@
             font-size: 0.72rem;
             color: var(--warm-gray);
             font-style: italic;
+        }
+
+        /* Sub-section heading inside card */
+        .menu-sub-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--red);
+            margin-bottom: 1rem;
         }
 
         /* ── INFO ──────────────────────────────── */
@@ -578,6 +602,48 @@
             font-weight: 500;
         }
 
+        /* ── ALLERGENE ──────────────────────────── */
+        .allergene-section {
+            background: var(--cream-light);
+            padding: 4rem 2rem;
+        }
+        .allergene-card {
+            background: #FFF9EE;
+            border: 1px solid rgba(184,133,42,0.2);
+            padding: 2.5rem 3rem;
+            max-width: 880px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(20,15,8,0.05);
+        }
+        .allergene-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--red);
+            margin-bottom: 1.25rem;
+        }
+        .allergene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.4rem 2rem;
+            margin-top: 0.75rem;
+        }
+        .allergene-item {
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+            font-weight: 300;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(184,133,42,0.07);
+        }
+        .allergene-item strong { color: var(--text-dark); font-weight: 500; }
+        .allergene-note {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
         /* ── FOOTER ─────────────────────────────── */
         footer {
             background: var(--dark);
@@ -621,6 +687,7 @@
             .about-grid, .info-grid { grid-template-columns: 1fr; gap: 3.5rem; }
             .about::before { display: none; }
             .menu-card { padding: 2.5rem 1.75rem; }
+            .allergene-card { padding: 2rem 1.5rem; }
         }
         @media (max-width: 600px) {
             nav { padding: 1.2rem 1.5rem; }
@@ -666,11 +733,11 @@
 <!-- ── BANNER ─────────────────────────────────── -->
 <div class="banner">
     <div class="banner-inner">
-        <span>🍕 Familienpizza-Deal:</span>
+        <span>Familienpizza-Deal:</span>
         <div class="banner-gem"></div>
-        <span>2 Pizzen kaufen &amp; 3 Getränke 0,33l gratis</span>
+        <span>3 Pizzen kaufen &amp; 3 Getränke 0,33 l gratis</span>
         <div class="banner-gem"></div>
-        <span>2 Familienpizzen &amp; 2×1l Getränk gratis</span>
+        <span>2 Familienpizzen &amp; 2×1 l Getränk gratis</span>
     </div>
 </div>
 
@@ -720,208 +787,300 @@
         <!-- Tab Bar -->
         <div class="menu-tabs reveal d2">
             <button class="menu-tab active" data-tab="pizza">Pizza</button>
-            <button class="menu-tab" data-tab="doener">Döner &amp; Falafel</button>
-            <button class="menu-tab" data-tab="pasta">Pasta</button>
-            <button class="menu-tab" data-tab="chicken">Fried Chicken</button>
-            <button class="menu-tab" data-tab="fingerfood">Fingerfood</button>
-            <button class="menu-tab" data-tab="pide">Pide &amp; Lahmacun</button>
             <button class="menu-tab" data-tab="salate">Salate</button>
-            <button class="menu-tab" data-tab="burger">Burger &amp; Baguette</button>
+            <button class="menu-tab" data-tab="pide">Pide &amp; Lahmacun</button>
+            <button class="menu-tab" data-tab="baguette">Baguette</button>
+            <button class="menu-tab" data-tab="burger">Burger</button>
+            <button class="menu-tab" data-tab="doener">Döner &amp; Falafel</button>
+            <button class="menu-tab" data-tab="pasta">Nudelgerichte</button>
+            <button class="menu-tab" data-tab="chicken">Fried Chicken</button>
+            <button class="menu-tab" data-tab="fingerfood">Fingerfood &amp; Dips</button>
             <button class="menu-tab" data-tab="getraenke">Getränke</button>
         </div>
 
-        <!-- PIZZA -->
+        <!-- ══ PIZZA ══ -->
         <div class="menu-panel active" id="tab-pizza">
             <div class="menu-card reveal">
                 <div class="menu-card-title">Pizza</div>
                 <div class="menu-card-sub">Täglich frischer Teig &nbsp;·&nbsp; Handgemacht</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="pizza-sizes">
-                    <span class="pizza-sizes-label">Größen verfügbar</span>
-                    <span class="pizza-sizes-prices">Klein (24 cm) &nbsp;|&nbsp; Normal &nbsp;|&nbsp; Groß (28 cm)</span>
+
+                <div class="pizza-info-box">
+                    <strong>Pizzaformen:</strong> Classic (dünner Teig, knuspriger Boden) &nbsp;·&nbsp; Pan Pizza (luftig-locker, dicker Boden nach amerikanischer Art) &nbsp;·&nbsp; Käserand (knuspriger dünner Teig, mit Mozzarella gefülltem Rand)<br>
+                    <strong>Aufpreis Käserand &amp; Pan Pizza:</strong> Normal +2,00 € &nbsp;·&nbsp; Maxi +3,00 € &nbsp;·&nbsp; XL +5,00 €
                 </div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Margherita</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Basilikum</span></div><span class="menu-item-price">5,00 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Schinken</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenbraten</span></div><span class="menu-item-price">6,00 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Funghi</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Champignons, Knoblauch</span></div><span class="menu-item-price">6,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Formaggio</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Vier Käsesorten</span></div><span class="menu-item-price">8,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Diavola</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Scharfe Salami, Chili</span></div><span class="menu-item-price">7,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Vegetariana</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Paprika, Zucchini, Aubergine, Oliven</span></div><span class="menu-item-price">7,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Quattro Stagioni</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Schinken, Pilze, Artischocken, Oliven</span></div><span class="menu-item-price">8,00 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Rucola</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Rucola, Parmaschinken, Parmesan</span></div><span class="menu-item-price">8,00 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Tonno</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Thunfisch, Zwiebeln, Kapern</span></div><span class="menu-item-price">7,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Hawaii</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Schinken, Ananas</span></div><span class="menu-item-price">7,00 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Calzone</span><span class="menu-item-desc">Gefüllt: Tomatensoße, Mozzarella, Ricotta, Schinken</span></div><span class="menu-item-price">8,50 €<small>ab</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pizza Frutti di Mare</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Gemischte Meeresfrüchte</span></div><span class="menu-item-price">9,50 €<small>ab</small></span></div>
+
+                <div class="pizza-sizes">
+                    <span class="pizza-sizes-label">Größen: Normal 24 Ø &nbsp;|&nbsp; Maxi 28 Ø &nbsp;|&nbsp; XL 36 Ø</span>
+                    <span class="pizza-sizes-prices">Normal &nbsp;/&nbsp; Maxi &nbsp;/&nbsp; XL</span>
+                </div>
+
+                <div class="menu-item"><div><span class="menu-item-name">1. Pizza Margherita</span><span class="menu-item-desc">Tomatensoße, Mozzarella</span></div><span class="menu-item-price">5,00 € / 7,00 € / 12,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">2. Pizza Funghi</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Champignons</span></div><span class="menu-item-price">6,00 € / 7,50 € / 13,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">3. Pizza Schinken</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken</span></div><span class="menu-item-price">6,00 € / 7,50 € / 13,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">4. Pizza Salami</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Salami</span></div><span class="menu-item-price">6,00 € / 7,50 € / 13,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">5. Pizza Sucuk</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Sucuk, Ei</span></div><span class="menu-item-price">6,00 € / 7,50 € / 13,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">6. Pizza Tonno</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Thunfisch, Zwiebeln, Paprika</span></div><span class="menu-item-price">7,00 € / 8,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">7. Pizza Hawaii</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken, Ananas</span></div><span class="menu-item-price">7,00 € / 8,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">8. Pizza Bolognese</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Hackfleisch</span></div><span class="menu-item-price">7,00 € / 8,50 € / 14,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">9. Pizza Romana</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken, Champignons</span></div><span class="menu-item-price">7,00 € / 8,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">10. Pizza Spinat</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Spinat, scharfer Käse, Mais</span></div><span class="menu-item-price">7,00 € / 8,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">11. Pizza Sama</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Salami, Putenschinken, Zwiebeln, Knoblauch</span></div><span class="menu-item-price">8,00 € / 9,50 € / 16,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">12. Pizza Hollandaise</span><span class="menu-item-desc">Hähnchenbrust, Brokkoli, Sauce Hollandaise, Käse</span></div><span class="menu-item-price">8,00 € / 9,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">13. Pizza Quattro Formaggi</span><span class="menu-item-desc">Tomatensoße, vier verschiedene Käsesorten</span></div><span class="menu-item-price">7,00 € / 8,50 € / 14,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">14. Pizza Quattro Stagioni</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken, Salami, Artischocken</span></div><span class="menu-item-price">8,00 € / 9,50 € / 16,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">15. Pizza Gemüse</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Champignons, Mais, Oliven</span></div><span class="menu-item-price">7,00 € / 8,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">16. Pizza Döner</span><span class="menu-item-desc">Kalb oder Hähnchen, Tomatensoße, Mozzarella, Dönerfleisch, Zwiebeln, Peperoni</span></div><span class="menu-item-price">7,50 € / 9,00 € / 15,50 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">17. Pizza Rucola</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Knoblauch, Rucola</span></div><span class="menu-item-price">6,00 € / 7,50 € / 13,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">18. Pizza Chef</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken, Salami, Zwiebeln, Ei</span></div><span class="menu-item-price">8,00 € / 9,50 € / 16,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">19. Pizza Frutti di Mare</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Meeresfrüchte, Knoblauch</span></div><span class="menu-item-price">8,00 € / 9,50 € / 16,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">20. Pizza Sardellen</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Sardellen, Kapern</span></div><span class="menu-item-price">7,00 € / 8,50 € / 14,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">21. Pizza Diavolo</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Salami, Zwiebeln, milde Peperoni</span></div><span class="menu-item-price">7,00 € / 8,50 € / 14,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">22. Pizza Chicken</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Hähnchenbrust, Paprika, Jalapeños</span></div><span class="menu-item-price">8,00 € / 9,50 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">23. Pizza Vegetarisch</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Tomatenscheiben, Rucola, Parmesan</span></div><span class="menu-item-price">7,50 € / 9,00 € / 15,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">24. Salmon</span><span class="menu-item-desc">Lachs, Spinat, Knoblauch</span></div><span class="menu-item-price">8,00 € / 9,50 € / 16,00 €<small>Normal / Maxi / XL</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">25. Pizza Calzone</span><span class="menu-item-desc">Tomatensoße, Mozzarella, Putenschinken, Champignons</span></div><span class="menu-item-price">9,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">26. Pizza nach Wahl</span><span class="menu-item-desc">Bis zu 5 Zutaten nach Wahl</span></div><span class="menu-item-price">9,00 €</span></div>
+
                 <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Änderungen vorbehalten &nbsp;·&nbsp; Allergene auf Anfrage</p>
             </div>
             <div class="family-deal reveal">
-                <div class="family-deal-title">🍕 Familienpizza Deal</div>
+                <div class="family-deal-title">Familienpizza Deal</div>
                 <p class="family-deal-text">
-                    <strong style="color:var(--gold-light)">2 Pizzen kaufen</strong> &amp; 3 Getränke 0,33l kostenlos erhalten<br>
-                    <strong style="color:var(--gold-light)">2 Familienpizzen kaufen</strong> &amp; 2×1l Getränke kostenlos erhalten
+                    <strong style="color:var(--gold-light)">3 Pizzen kaufen</strong> &amp; 3 Getränke 0,33 l kostenlos erhalten<br>
+                    <strong style="color:var(--gold-light)">2 Familienpizzen kaufen</strong> &amp; 2×1 l Getränke kostenlos erhalten
                 </p>
             </div>
         </div>
 
-        <!-- DÖNER & FALAFEL -->
-        <div class="menu-panel" id="tab-doener">
+        <!-- ══ SALATE ══ -->
+        <div class="menu-panel" id="tab-salate">
             <div class="menu-card reveal">
-                <div class="menu-card-title">Döner &amp; Falafel</div>
-                <div class="menu-card-sub">Hähnchen oder Kalb &nbsp;·&nbsp; Täglich frisch</div>
+                <div class="menu-card-title">Salate</div>
+                <div class="menu-card-sub">Frisch &amp; täglich zubereitet &nbsp;·&nbsp; Klein / Groß</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Döner</span><span class="menu-item-desc">Hähnchen oder Kalb, mit Salat, Tomaten, Zwiebeln und Soße</span></div><span class="menu-item-price">6,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Döner Vegetarisch</span><span class="menu-item-desc">Mit gegrilltem Gemüse, Salat und Joghurtsoße</span></div><span class="menu-item-price">5,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Dürüm Döner</span><span class="menu-item-desc">Hähnchen oder Kalb im Fladenbrot gerollt</span></div><span class="menu-item-price">7,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Dürüm Vegetarisch</span><span class="menu-item-desc">Gegrilltes Gemüse im Fladenbrot gerollt</span></div><span class="menu-item-price">5,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Döner Teller</span><span class="menu-item-desc">Mit Reis oder Pommes, Salat und Soße</span></div><span class="menu-item-price">10,50 €</span></div>
-                <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Falafel Tasche</span><span class="menu-item-desc">4 Stück, mit Saté &amp; Soße</span></div><span class="menu-item-price">3,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Falafel Dürüm</span><span class="menu-item-desc">4 Stück im Fladenbrot</span></div><span class="menu-item-price">6,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Falafel Teller</span><span class="menu-item-desc">7 Stück, mit Pommes und Soße</span></div><span class="menu-item-price">10,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Dürüm Salat</span><span class="menu-item-desc">Falafel-Dürüm mit frischem Salat</span></div><span class="menu-item-price">4,00 €</span></div>
+
+                <div class="menu-item"><div><span class="menu-item-name">31. Gemischter Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Paprika</span></div><span class="menu-item-price">4,00 € / 7,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">32. Hähnchensalat / Fitness Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Hähnchenbrust, Paprika, Zwiebeln</span></div><span class="menu-item-price">6,00 € / 9,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">33. Schinken Salat</span><span class="menu-item-desc">Eisbergsalat, Käse, Gurken, Tomaten, Putenschinken, Paprika, Ei</span></div><span class="menu-item-price">5,50 € / 7,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">34. Thunfisch Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Paprika, rote Zwiebeln, Thunfisch, Ei</span></div><span class="menu-item-price">5,50 € / 7,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">35. Griechischer Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Paprika, rote Zwiebeln, Mozzarella, Oliven</span></div><span class="menu-item-price">6,00 € / 9,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">36. Döner Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Karotten, Paprika, Döner und Zwiebeln</span></div><span class="menu-item-price">5,00 € / 7,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">37. Sama Salat</span><span class="menu-item-desc">Eisbergsalat, Gurken, Tomaten, Paprika, Weißkäse, Oliven und rote Zwiebeln</span></div><span class="menu-item-price">5,00 € / 7,00 €<small>Klein / Groß</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">38. Salat nach Wahl</span><span class="menu-item-desc">Auf Anfrage</span></div><span class="menu-item-price">auf Anfrage</span></div>
+
                 <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
             </div>
         </div>
 
-        <!-- PASTA -->
-        <div class="menu-panel" id="tab-pasta">
-            <div class="menu-card reveal">
-                <div class="menu-card-title">Nudelgerichte</div>
-                <div class="menu-card-sub">Rigatoni &nbsp;·&nbsp; Spaghetti &nbsp;·&nbsp; Tortelloni &nbsp;·&nbsp; Tagliatelle</div>
-                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pomodoro</span><span class="menu-item-desc">Tomatensoße, Zwiebeln, Knoblauch</span></div><span class="menu-item-price">7,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Arrabiata</span><span class="menu-item-desc">Tomatensoße, Zwiebeln, Knoblauch, Chili</span></div><span class="menu-item-price">7,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pesto Rosso</span><span class="menu-item-desc">Tomaten-Pesto, Parmesan, Basilikum</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Carbonara</span><span class="menu-item-desc">Sahnesoße, Räucherspeck, Ei</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Crema di Funghi</span><span class="menu-item-desc">Sahnesoße, Champignons, Zwiebeln</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pesto Funghi</span><span class="menu-item-desc">Sahnesoße, Hähnchenfleisch, Champignons</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Gorgonzola</span><span class="menu-item-desc">Gorgonzolasoße, Hähnchenfleisch, Walnüsse, Knoblauch</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Toscana</span><span class="menu-item-desc">Tomaten- oder Sahnesoße, Truthahn, Zwiebeln, Knoblauch</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Frutti di Mare</span><span class="menu-item-desc">Meeresfrüchte in Tomaten- oder Sahnesoße</span></div><span class="menu-item-price">8,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Lasagne al Forno</span><span class="menu-item-desc">Klassische Lasagne, überbacken mit Béchamelsoße</span></div><span class="menu-item-price">8,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Luchs &amp; Spargel</span><span class="menu-item-desc">Tomaten- oder Sahnesoße, Lachs, Spargel, Spinat, Knoblauch</span></div><span class="menu-item-price">8,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Pollo Speziale</span><span class="menu-item-desc">Tomaten- oder Sahnesoße, Garnelen, Knoblauch, Spinat</span></div><span class="menu-item-price">8,50 €</span></div>
-                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Nudeln wählbar &nbsp;·&nbsp; Allergene auf Anfrage</p>
-            </div>
-        </div>
-
-        <!-- FRIED CHICKEN -->
-        <div class="menu-panel" id="tab-chicken">
-            <div class="menu-card reveal">
-                <div class="menu-card-title">Fried Chicken</div>
-                <div class="menu-card-sub">Knusprig &nbsp;·&nbsp; Saftig &nbsp;·&nbsp; Frisch zubereitet</div>
-                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Breaded Chicken</span><span class="menu-item-desc">Mit Pommes, Essiggurken und Mayonnaise</span></div><span class="menu-item-price">12,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Crispy Chicken</span><span class="menu-item-desc">Mit Pommes, Saté &amp; Chilimayo</span></div><span class="menu-item-price">12,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Crispy Chicken Sandwich</span><span class="menu-item-desc">Mit Chili Cheese Sauce</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Curacao Hähnchen</span><span class="menu-item-desc">Ganzes Hähnchen, Curacao-Marinade</span></div><span class="menu-item-price">12,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Halbes Hähnchen</span><span class="menu-item-desc">Gegrilltes halbes Hähnchen</span></div><span class="menu-item-price">7,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Halbes Hähnchen Teller</span><span class="menu-item-desc">Mit Salat, Reis oder Pommes</span></div><span class="menu-item-price">10,00 €</span></div>
-                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
-            </div>
-        </div>
-
-        <!-- FINGERFOOD -->
-        <div class="menu-panel" id="tab-fingerfood">
-            <div class="menu-card reveal">
-                <div class="menu-card-title">Fingerfood</div>
-                <div class="menu-card-sub">Perfekt zum Teilen</div>
-                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">BBQ Chicken Wings</span><span class="menu-item-desc">6 Stück &nbsp;·&nbsp; Scharf oder mild &nbsp;·&nbsp; 1 Dip nach Wahl</span></div><span class="menu-item-price">6,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Buffalo Chicken Wings</span><span class="menu-item-desc">6 Stück &nbsp;·&nbsp; Scharf &nbsp;·&nbsp; 1 Dip nach Wahl</span></div><span class="menu-item-price">6,80 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Buffalo Wings Groß</span><span class="menu-item-desc">12 Stück &nbsp;·&nbsp; 2 Dips nach Wahl</span></div><span class="menu-item-price">10,90 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Nuggets</span><span class="menu-item-desc">6 Stück &nbsp;·&nbsp; 2 Dips nach Wahl</span></div><span class="menu-item-price">4,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Chicken Nuggets Groß</span><span class="menu-item-desc">12 Stück &nbsp;·&nbsp; 2 Dips nach Wahl</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Chicken Strips</span><span class="menu-item-desc">5 Stück &nbsp;·&nbsp; 2 Dips nach Wahl</span></div><span class="menu-item-price">7,90 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Köfte</span><span class="menu-item-desc">5 Stück &nbsp;·&nbsp; Menü mit Salat und Pommes</span></div><span class="menu-item-price">5,00 € <small>/ Menü 9,00 €</small></span></div>
-                <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:var(--red); margin-bottom:1rem;">Dips</p>
-                <div class="menu-item"><div><span class="menu-item-name">Sweet-Chili</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">BBQ Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Knoblauch</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Chili-Mayo</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Sriracha Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Indi-Curry Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Cocktail Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Ketchup oder Mayonnaise</span></div><span class="menu-item-price">1,00 €</span></div>
-                <p class="menu-footer-note">Alle Preise inkl. MwSt.</p>
-            </div>
-        </div>
-
-        <!-- PIDE & LAHMACUN -->
+        <!-- ══ PIDE & LAHMACUN ══ -->
         <div class="menu-panel" id="tab-pide">
             <div class="menu-card reveal">
                 <div class="menu-card-title">Pide &amp; Lahmacun</div>
                 <div class="menu-card-sub">Orientalische Spezialitäten &nbsp;·&nbsp; Frisch aus dem Ofen</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Käse Pide</span><span class="menu-item-desc">Mit Mozzarella überbacken</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Cheddar Pide</span><span class="menu-item-desc">Mit Cheddar-Käse überbacken</span></div><span class="menu-item-price">8,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Käse &amp; Ei Pide</span><span class="menu-item-desc">Mit Käse und Spiegelei überbacken</span></div><span class="menu-item-price">8,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Hackfleisch Pide</span><span class="menu-item-desc">Mit gewürztem Hackfleisch</span></div><span class="menu-item-price">8,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Hackfleisch Pide Spezial</span><span class="menu-item-desc">Mit Hackfleisch, Käse und Gemüse</span></div><span class="menu-item-price">9,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Hähnchen Pide</span><span class="menu-item-desc">Mit gewürztem Hähnchenfleisch, Gemüse</span></div><span class="menu-item-price">8,50 €</span></div>
+
+                <p class="menu-sub-heading">Pide</p>
+                <div class="menu-item"><div><span class="menu-item-name">39. Käse Pide</span><span class="menu-item-desc">Mit Weißkäse überbacken</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">40. Cheddar Pide</span><span class="menu-item-desc">Mit Goudakäse überbacken</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">41. Spinat Pide</span><span class="menu-item-desc">Mit Spinat und Käse überbacken</span></div><span class="menu-item-price">8,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">42. Sucuk Pide</span><span class="menu-item-desc">Mit türkischer Knoblauchwurst überbacken</span></div><span class="menu-item-price">8,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">43. Hackfleisch Pide</span><span class="menu-item-desc">Mit Hackfleisch und Ei überbacken</span></div><span class="menu-item-price">9,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">44. Hackfleisch Pide</span><span class="menu-item-desc">Nur Hackfleisch</span></div><span class="menu-item-price">8,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">45. Döner Pide</span><span class="menu-item-desc">Mit Kalb- oder Hähnchenfleisch-Drehspieß, Käse überbacken</span></div><span class="menu-item-price">9,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">46. Vegetarische Pide</span><span class="menu-item-desc">Mit Spinat, Paprika, Brokkoli</span></div><span class="menu-item-price">9,00 €</span></div>
+
                 <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:var(--red); margin-bottom:1rem;">Lahmacun</p>
-                <div class="menu-item"><div><span class="menu-item-name">Lahmacun</span><span class="menu-item-desc">Orientalische Fladenbrot-Pizza mit Hackfleisch-Belag</span></div><span class="menu-item-price">3,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Lahmacun mit Salat</span><span class="menu-item-desc">Mit frischem Salat und Joghurtsoße</span></div><span class="menu-item-price">4,50 €</span></div>
+                <p class="menu-sub-heading">Lahmacun</p>
+                <div class="menu-item"><div><span class="menu-item-name">47. Lahmacun</span><span class="menu-item-desc">Ohne alles</span></div><span class="menu-item-price">3,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">48. Lahmacun mit Salat</span></div><span class="menu-item-price">5,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">49. Lahmacun mit Döner</span></div><span class="menu-item-price">8,50 €</span></div>
+
                 <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
             </div>
         </div>
 
-        <!-- SALATE -->
-        <div class="menu-panel" id="tab-salate">
+        <!-- ══ BAGUETTE ══ -->
+        <div class="menu-panel" id="tab-baguette">
             <div class="menu-card reveal">
-                <div class="menu-card-title">Salate</div>
-                <div class="menu-card-sub">Frisch &amp; täglich zubereitet</div>
+                <div class="menu-card-title">Baguette</div>
+                <div class="menu-card-sub">Frisch belegt</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Gemischter Salat</span><span class="menu-item-desc">Eisberg, Gurken, Tomaten, Paprika, Zwiebeln</span></div><span class="menu-item-price">4,80 € <small>/ Groß 5,80 €</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Eisgurkensalat</span><span class="menu-item-desc">Gurken, Tomaten, Paprika und Zwiebeln</span></div><span class="menu-item-price">4,80 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Krautsalat</span><span class="menu-item-desc">Weißkohl, Karotten, Essig-Öl-Dressing</span></div><span class="menu-item-price">3,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Flussfisch Salat</span><span class="menu-item-desc">Mit mariniertem Fisch, Gemüse und Kräutern</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Sama Salat</span><span class="menu-item-desc">Hausgemachter Spezialsalat nach Art des Hauses</span></div><span class="menu-item-price">6,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Salat nach Wahl</span><span class="menu-item-desc">Fragen Sie nach unseren tagesaktuellen Salaten</span></div><span class="menu-item-price">auf Anfrage</span></div>
-                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Klein/Groß-Optionen verfügbar</p>
+
+                <div class="menu-item"><div><span class="menu-item-name">50. Putenschinken</span><span class="menu-item-desc">Mit Remoulade, Käse, Salat, Tomaten und Putenschinken</span></div><span class="menu-item-price">7,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">51. Caprese</span><span class="menu-item-desc">Mit Remoulade, Mozzarella, Salat, Tomaten und Basilikum</span></div><span class="menu-item-price">6,00 €</span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
             </div>
         </div>
 
-        <!-- BURGER & BAGUETTE -->
+        <!-- ══ BURGER ══ -->
         <div class="menu-panel" id="tab-burger">
             <div class="menu-card reveal">
-                <div class="menu-card-title">Burger &amp; Baguette</div>
-                <div class="menu-card-sub">Saftig &amp; frisch belegt</div>
+                <div class="menu-card-title">Burger</div>
+                <div class="menu-card-sub">Menü inkl. Pommes &amp; 1 Getränk nach Wahl (außer Red Bull)</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Chickenburger</span><span class="menu-item-desc">Mit Hähnchenfleisch, Salat, Zwiebeln und Tomaten</span></div><span class="menu-item-price">6,90 € <small>/ Menü 10,00 €</small></span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Burger nach Wahl</span><span class="menu-item-desc">Weitere Varianten auf Anfrage</span></div><span class="menu-item-price">ab 6,90 €</span></div>
-                <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:var(--red); margin-bottom:1rem;">Baguette</p>
-                <div class="menu-item"><div><span class="menu-item-name">Käse Baguette</span><span class="menu-item-desc">Mit Käse überbacken, Salat und Tomaten</span></div><span class="menu-item-price">7,00 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Hähnchen Baguette</span><span class="menu-item-desc">Mit gewürztem Hähnchenfleisch und Salat</span></div><span class="menu-item-price">7,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Salami Baguette</span><span class="menu-item-desc">Mit Salami, Käse, Salat und Tomaten</span></div><span class="menu-item-price">7,00 €</span></div>
-                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Menü inkl. Pommes und Getränk &nbsp;·&nbsp; Allergene auf Anfrage</p>
+
+                <div class="menu-item"><div><span class="menu-item-name">52. Chickenburger</span><span class="menu-item-desc">Hühnerfleisch, Salat, Zwiebeln und Tomaten</span></div><span class="menu-item-price">6,00 € / 10,00 €<small>Einzel / Menü</small></span></div>
+                <div class="menu-item"><div><span class="menu-item-name">53. Hamburger</span><span class="menu-item-desc">Rindfleisch, Salat, Zwiebeln und Tomaten</span></div><span class="menu-item-price">6,00 € / 10,00 €<small>Einzel / Menü</small></span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
             </div>
         </div>
 
-        <!-- GETRÄNKE -->
+        <!-- ══ DÖNER & FALAFEL ══ -->
+        <div class="menu-panel" id="tab-doener">
+            <div class="menu-card reveal">
+                <div class="menu-card-title">Döner &amp; Falafel</div>
+                <div class="menu-card-sub">Hähnchen oder Kalb &nbsp;·&nbsp; Täglich frisch</div>
+                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+
+                <p class="menu-sub-heading">Döner</p>
+                <div class="menu-item"><div><span class="menu-item-name">54. Döner</span><span class="menu-item-desc">Hähnchen oder Kalb</span></div><span class="menu-item-price">6,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">55. Döner Vegetarisch</span></div><span class="menu-item-price">5,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">56. Dürüm Döner</span><span class="menu-item-desc">Hähnchen oder Kalb</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">57. Dürüm Vegetarisch</span></div><span class="menu-item-price">5,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">58. Döner Teller</span><span class="menu-item-desc">Mit Reis oder Pommes</span></div><span class="menu-item-price">10,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">59. Dönerbox</span></div><span class="menu-item-price">5,00 € / 7,50 €<small>Klein / Groß</small></span></div>
+
+                <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+                <p class="menu-sub-heading">Falafel</p>
+                <div class="menu-item"><div><span class="menu-item-name">60. Falafel Tasche 4 St.</span><span class="menu-item-desc">Salat &amp; Soße</span></div><span class="menu-item-price">5,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">61. Falafel Dürüm 4 St.</span><span class="menu-item-desc">Salat &amp; Soße</span></div><span class="menu-item-price">6,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">62. Falafel Teller 7 St.</span><span class="menu-item-desc">Pommes &amp; Soße &amp; Salat</span></div><span class="menu-item-price">10,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">63. Dürüm Salat</span></div><span class="menu-item-price">4,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">64. Taschen Salat</span></div><span class="menu-item-price">4,00 €</span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
+            </div>
+        </div>
+
+        <!-- ══ NUDELGERICHTE ══ -->
+        <div class="menu-panel" id="tab-pasta">
+            <div class="menu-card reveal">
+                <div class="menu-card-title">Nudelgerichte</div>
+                <div class="menu-card-sub">Rigatoni &nbsp;·&nbsp; Spaghetti &nbsp;·&nbsp; Tortellini &nbsp;·&nbsp; Tagliatelle</div>
+                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+
+                <div class="menu-item"><div><span class="menu-item-name">65. Pomodoro</span><span class="menu-item-desc">Mit Tomatensauce, Zwiebeln und Knoblauch</span></div><span class="menu-item-price">7,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">66. Arrabbiata</span><span class="menu-item-desc">Mit Tomatensauce, Zwiebeln, Knoblauch und Chili</span></div><span class="menu-item-price">7,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">67. Bolognese</span><span class="menu-item-desc">Mit Hackfleisch</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">68. Carbonara</span><span class="menu-item-desc">Mit Sahnesauce, Putenschinken und Eigelb</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">69. Crema di Funghi</span><span class="menu-item-desc">Mit Sahnesauce, Champignons und Zwiebeln</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">70. Pollo Funghi</span><span class="menu-item-desc">Mit Sahnesauce, Hähnchenbrust und Champignons</span></div><span class="menu-item-price">8,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">71. Brokkoli</span><span class="menu-item-desc">Mit Sahnesauce, Hähnchenbrust, Brokkoli und Knoblauch</span></div><span class="menu-item-price">8,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">72. Tonno</span><span class="menu-item-desc">Mit Tomaten- oder Sahnesauce, Thunfisch, Zwiebeln und Knoblauch</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">73. Frutti di Mare</span><span class="menu-item-desc">Mit Tomaten- oder Sahnesauce, Meeresfrüchte und Knoblauch</span></div><span class="menu-item-price">9,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">74. Lachs &amp; Spinat</span><span class="menu-item-desc">Mit Tomaten- oder Sahnesauce, Lachs, Spinat und Knoblauch</span></div><span class="menu-item-price">9,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">75. Gambas Pasta</span><span class="menu-item-desc">Mit Tomaten- oder Sahnesauce, Garnelen, Knoblauch und Spinat</span></div><span class="menu-item-price">9,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">76. Curry Pasta</span><span class="menu-item-desc">Mit Sahnesauce, Curry, Hähnchen, Paprika und Ananas</span></div><span class="menu-item-price">8,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">77. Pasta nach Wahl</span><span class="menu-item-desc">Auf Anfrage</span></div><span class="menu-item-price">auf Anfrage</span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Nudelsorte frei wählbar &nbsp;·&nbsp; Allergene auf Anfrage</p>
+            </div>
+        </div>
+
+        <!-- ══ FRIED CHICKEN ══ -->
+        <div class="menu-panel" id="tab-chicken">
+            <div class="menu-card reveal">
+                <div class="menu-card-title">Fried Chicken</div>
+                <div class="menu-card-sub">Knusprig &nbsp;·&nbsp; Saftig &nbsp;·&nbsp; Frisch zubereitet</div>
+                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+
+                <div class="menu-item"><div><span class="menu-item-name">78. Brosted Chicken</span><span class="menu-item-desc">Mit Pommes, Essiggurken und Mayonnaise</span></div><span class="menu-item-price">12,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">79. Crispy Chicken</span></div><span class="menu-item-price">12,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">80. Sama Spezial Sandwich</span><span class="menu-item-desc">Mit Hähnchenbrust, Pommes und Chili-Cheese-Sauce</span></div><span class="menu-item-price">7,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">81. Ganzes Hähnchen</span><span class="menu-item-desc">Mit Salat, Reis oder Pommes</span></div><span class="menu-item-price">12,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">82. Halbes Hähnchen</span><span class="menu-item-desc"></span></div><span class="menu-item-price">7,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">83. Halbes Hähnchen</span><span class="menu-item-desc">Mit Salat, Reis oder Pommes</span></div><span class="menu-item-price">10,00 €</span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Allergene auf Anfrage</p>
+            </div>
+        </div>
+
+        <!-- ══ FINGERFOOD & DIPS ══ -->
+        <div class="menu-panel" id="tab-fingerfood">
+            <div class="menu-card reveal">
+                <div class="menu-card-title">Fingerfood</div>
+                <div class="menu-card-sub">Perfekt zum Teilen</div>
+                <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+
+                <div class="menu-item"><div><span class="menu-item-name">84. BBQ Chicken Wings 6 Stk.</span><span class="menu-item-desc">Mit 1 Dip nach Wahl</span></div><span class="menu-item-price">6,90 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">85. Buffalo Chicken Wings 6 Stk. scharf</span><span class="menu-item-desc">Mit 1 Dip nach Wahl</span></div><span class="menu-item-price">6,90 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">86. BBQ Wings 12 Stk.</span><span class="menu-item-desc">2 Dips nach Wahl</span></div><span class="menu-item-price">10,90 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">87. Buffalo Wings 12 Stk.</span><span class="menu-item-desc">2 Dips nach Wahl</span></div><span class="menu-item-price">10,90 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">88. Chicken Nuggets 6 Stk.</span><span class="menu-item-desc">1 Dip nach Wahl</span></div><span class="menu-item-price">5,90 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">89. Chicken Nuggets 12 Stk.</span><span class="menu-item-desc">2 Dips nach Wahl</span></div><span class="menu-item-price">9,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">90. Kibbeh 3 Stk.</span><span class="menu-item-desc">Menü: Salat und Pommes</span></div><span class="menu-item-price">5,00 € / 10,00 €<small>Einzel / Menü</small></span></div>
+
+                <div class="menu-sep" style="margin-top:1.5rem"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
+                <p class="menu-sub-heading">Dips</p>
+                <div class="menu-item"><div><span class="menu-item-name">91. Sweet-Chilli</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">92. BBQ Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">93. Sour Cream</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">94. Chilli-Mayo</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">95. Kräutercreme</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">96. Indi-Curry Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">97. Curry Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">98. Coctail Sauce</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">99. Ketchup oder Mayonnaise</span></div><span class="menu-item-price">1,00 €</span></div>
+
+                <p class="menu-footer-note">Alle Preise inkl. MwSt.</p>
+            </div>
+        </div>
+
+        <!-- ══ GETRÄNKE ══ -->
         <div class="menu-panel" id="tab-getraenke">
             <div class="menu-card reveal">
                 <div class="menu-card-title">Getränke</div>
                 <div class="menu-card-sub">Kalt &amp; Heiß</div>
                 <div class="menu-sep"><div class="menu-sep-line"></div><div class="menu-sep-gem"></div><div class="menu-sep-line"></div></div>
-                <div class="menu-item"><div><span class="menu-item-name">Mineralwasser</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Cola / Cola Light</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Fanta</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Sprite</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Lemon</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Eistee</span><span class="menu-item-desc">0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Schorle</span><span class="menu-item-desc">0,25 l, Apfel oder Kirsch</span></div><span class="menu-item-price">1,50 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Café</span><span class="menu-item-desc">Frisch gebrüht</span></div><span class="menu-item-price">1,80 €</span></div>
-                <div class="menu-item"><div><span class="menu-item-name">Café Macchiato</span><span class="menu-item-desc">Espresso mit Milchschaum</span></div><span class="menu-item-price">2,20 €</span></div>
+
+                <div class="menu-item"><div><span class="menu-item-name">100. Mineralwasser 0,25 l</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">101. Cola / Cola light</span><span class="menu-item-desc">1,3 l</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">102. Fanta</span><span class="menu-item-desc">1,3 l</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">103. Ayran</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">104. Capri Sun</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">105. Durstlöscher</span></div><span class="menu-item-price">1,50 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">106. Energie</span></div><span class="menu-item-price">3,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">107. Café</span></div><span class="menu-item-price">2,00 €</span></div>
+                <div class="menu-item"><div><span class="menu-item-name">108. Latte Macchiato</span></div><span class="menu-item-price">2,50 €</span></div>
+
                 <p class="menu-footer-note">Alle Preise inkl. MwSt.</p>
             </div>
         </div>
 
     </div><!-- /container -->
 </section>
+
+<!-- ── ALLERGENE ─────────────────────────────── -->
+<div class="allergene-section">
+    <div class="allergene-card reveal">
+        <div class="allergene-card-title">Inhaltsstoffe &amp; Allergene</div>
+        <p style="font-size:0.8rem;color:var(--warm-gray);margin-bottom:1.25rem;font-weight:300;">
+            <strong style="color:var(--text-dark);">Zusatzstoffe:</strong>
+            1. Coffeinhaltig &nbsp;·&nbsp; 2. Farbstoffe &nbsp;·&nbsp; 3. Süßstoffe &nbsp;·&nbsp; 4. Antioxidationsmittel &nbsp;·&nbsp; 5. Konservierungsstoff &nbsp;·&nbsp; 6. Mit Geschmacksverstärker
+        </p>
+        <p style="font-size:0.8rem;color:var(--text-dark);font-weight:500;margin-bottom:0.5rem;">Allergene:</p>
+        <div class="allergene-grid">
+            <div class="allergene-item"><strong>A.</strong> Glutenhaltiges Weizenmehl</div>
+            <div class="allergene-item"><strong>B.</strong> Krebstiere</div>
+            <div class="allergene-item"><strong>C.</strong> Eier</div>
+            <div class="allergene-item"><strong>D.</strong> Fische</div>
+            <div class="allergene-item"><strong>E.</strong> Erdnüsse</div>
+            <div class="allergene-item"><strong>F.</strong> Sojabohnen</div>
+            <div class="allergene-item"><strong>G.</strong> Milch</div>
+            <div class="allergene-item"><strong>H.</strong> Schalenfrüchte</div>
+            <div class="allergene-item"><strong>I.</strong> Sellerie</div>
+            <div class="allergene-item"><strong>J.</strong> Senf</div>
+            <div class="allergene-item"><strong>K.</strong> Sesamsamen</div>
+            <div class="allergene-item"><strong>L.</strong> Schwefeldioxid und Sulfit</div>
+            <div class="allergene-item"><strong>M.</strong> Lupinen</div>
+            <div class="allergene-item"><strong>N.</strong> Weichtiere</div>
+        </div>
+        <p class="allergene-note">Bei Fragen zu Allergenen oder Unverträglichkeiten sprechen Sie unser Personal gerne an.</p>
+    </div>
+</div>
 
 <!-- ── INFO ───────────────────────────────────── -->
 <section class="info" id="kontakt">
@@ -932,11 +1091,11 @@
                 <h2 class="section-title reveal d1">Täglich<br><em>für Sie da</em></h2>
                 <ul class="hours-list">
                     <li class="hours-item reveal d2">
-                        <span class="day">Montag – Sonntag</span>
-                        <span class="time">11:00 – 22:00 Uhr</span>
+                        <span class="day">Mo. – So. (Öffnungszeiten)</span>
+                        <span class="time">10:00 – 22:00 Uhr</span>
                     </li>
                     <li class="hours-item special reveal d3">
-                        <span class="day">Lieferservice</span>
+                        <span class="day">Lieferservice (täglich)</span>
                         <span class="time">11:00 – 21:00 Uhr</span>
                     </li>
                 </ul>
@@ -963,25 +1122,15 @@
                     <div class="contact-item reveal d2">
                         <div class="contact-icon">📞</div>
                         <div>
-                            <span class="contact-label">Restaurant</span>
-                            <span class="contact-value"><a href="tel:020838590901">0208 38 90 901</a></span>
+                            <span class="contact-label">Telefon</span>
+                            <span class="contact-value"><a href="tel:020838590901">0208 385 90 901</a></span>
                         </div>
                     </div>
                     <div class="contact-item reveal d3">
-                        <div class="contact-icon">🛵</div>
+                        <div class="contact-icon">📱</div>
                         <div>
-                            <span class="contact-label">Lieferservice</span>
+                            <span class="contact-label">Mobil / WhatsApp</span>
                             <span class="contact-value"><a href="tel:015215624665">0152 156 246 65</a></span>
-                        </div>
-                    </div>
-                    <div class="contact-item reveal d3">
-                        <div class="contact-icon">🚌</div>
-                        <div>
-                            <span class="contact-label">Anreise</span>
-                            <span class="contact-value" style="font-size:0.88rem;color:rgba(240,230,204,0.45);">
-                                Zentrumsnah &amp; gut per ÖPNV erreichbar<br>
-                                Parkmöglichkeiten in der Nähe
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -996,7 +1145,7 @@
     <div class="footer-sub">Restaurant &nbsp;·&nbsp; Oberhausen</div>
     <div class="footer-rule"></div>
     <p class="footer-copy">Bahnhofstraße 42 &nbsp;·&nbsp; 46145 Oberhausen</p>
-    <p class="footer-copy">0208 38 90 901 &nbsp;·&nbsp; Lieferservice: 0152 156 246 65</p>
+    <p class="footer-copy">0208 385 90 901 &nbsp;·&nbsp; Mobil/WhatsApp: 0152 156 246 65</p>
     <p class="footer-copy" style="margin-top:0.5rem;">© 2025 Sama Restaurant. Alle Rechte vorbehalten.</p>
 </footer>
 
