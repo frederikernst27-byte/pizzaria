@@ -82,6 +82,8 @@
             position: absolute;
             inset: 0;
             background:
+                linear-gradient(rgba(14,11,6,0.74), rgba(14,11,6,0.86)),
+                url("https://cdn.pixabay.com/photo/2020/05/11/04/11/pizza-5156418_1280.jpg") center / cover no-repeat,
                 radial-gradient(ellipse 70% 50% at 20% 70%, rgba(155,26,19,0.28) 0%, transparent 65%),
                 radial-gradient(ellipse 50% 70% at 85% 20%, rgba(184,133,42,0.16) 0%, transparent 60%),
                 radial-gradient(ellipse 100% 100% at 50% 50%, rgba(30,22,10,0.5) 0%, var(--dark) 72%);
@@ -328,6 +330,20 @@
             font-weight: 300;
             margin-top: 0.75rem;
         }
+        .about::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 48%;
+            background:
+                linear-gradient(90deg, rgba(24,17,9,0.35), rgba(24,17,9,0.95)),
+                url("https://cdn.pixabay.com/photo/2021/07/19/16/04/pizza-6478478_1280.jpg") center / cover no-repeat;
+            opacity: 0.32;
+            pointer-events: none;
+        }
+        .about .container { position: relative; z-index: 1; }
 
         /* ── MENU ──────────────────────────────── */
         .menu { background: var(--cream-light); }
@@ -538,6 +554,17 @@
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
             opacity: 0.45;
         }
+        .info::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(24,17,9,0.96), rgba(24,17,9,0.78)),
+                url("https://cdn.pixabay.com/photo/2021/08/29/14/27/doner-kebab-6583404_1280.jpg") right center / auto 115% no-repeat;
+            opacity: 0.28;
+            pointer-events: none;
+        }
+        .info .container { position: relative; z-index: 1; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
         .info .section-label { color: var(--gold-light); }
         .info .section-title { color: var(--cream); }
@@ -669,6 +696,21 @@
         }
         .footer-rule { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 1.75rem; opacity: 0.3; }
         .footer-copy { font-size: 0.7rem; color: rgba(240,230,204,0.2); letter-spacing: 0.08em; line-height: 1.9; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .footer-links a {
+            color: rgba(240,230,204,0.38);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .footer-links a:hover { color: var(--gold-light); }
 
         /* ── SCROLL REVEAL ──────────────────────── */
         .reveal {
@@ -685,6 +727,8 @@
         /* ── RESPONSIVE ─────────────────────────── */
         @media (max-width: 900px) {
             .about-grid, .info-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .about::after { width: 100%; opacity: 0.16; }
+            .info::after { background-size: cover; opacity: 0.18; }
             .about::before { display: none; }
             .menu-card { padding: 2.5rem 1.75rem; }
             .allergene-card { padding: 2rem 1.5rem; }
@@ -1133,6 +1177,13 @@
                             <span class="contact-value"><a href="tel:015215624665">0152 156 246 65</a></span>
                         </div>
                     </div>
+                    <div class="contact-item reveal d3">
+                        <div class="contact-icon">✉</div>
+                        <div>
+                            <span class="contact-label">E-Mail</span>
+                            <span class="contact-value"><a href="mailto:samareataurantxxx@gmail.com">samareataurantxxx@gmail.com</a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1146,7 +1197,11 @@
     <div class="footer-rule"></div>
     <p class="footer-copy">Bahnhofstraße 42 &nbsp;·&nbsp; 46145 Oberhausen</p>
     <p class="footer-copy">0208 385 90 901 &nbsp;·&nbsp; Mobil/WhatsApp: 0152 156 246 65</p>
-    <p class="footer-copy" style="margin-top:0.5rem;">© 2025 Sama Restaurant. Alle Rechte vorbehalten.</p>
+    <div class="footer-links">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+    </div>
+    <p class="footer-copy" style="margin-top:0.5rem;">© 2026 Sama Restaurant. Alle Rechte vorbehalten.</p>
 </footer>
 
 <script>
