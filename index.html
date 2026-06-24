@@ -287,6 +287,7 @@
             display: grid;
             height: 240px;
         }
+        .gallery-row--2 { grid-template-columns: repeat(2, 1fr); }
         .gallery-row--3 { grid-template-columns: repeat(3, 1fr); }
         .gallery-row--4 { grid-template-columns: repeat(4, 1fr); }
         .gallery-item {
@@ -892,16 +893,6 @@
     </div>
 </section>
 
-<!-- ── BANNER ─────────────────────────────────── -->
-<div class="banner">
-    <div class="banner-inner">
-        <span>Familienpizza-Deal:</span>
-        <div class="banner-gem"></div>
-        <span>3 Pizzen kaufen &amp; 3 Getränke 0,33 l gratis</span>
-        <div class="banner-gem"></div>
-        <span>2 Familienpizzen &amp; 2×1 l Getränk gratis</span>
-    </div>
-</div>
 
 <!-- ── GALLERY ─────────────────────────────── -->
 <div class="gallery">
@@ -935,8 +926,8 @@
             <span class="gallery-label">Linsensuppe</span>
         </div>
     </div>
-    <!-- Reihe 3: Fingerfood / Lahmacun / Burger / Pide -->
-    <div class="gallery-row gallery-row--4">
+    <!-- Reihe 3: Fingerfood / Lahmacun / Pide -->
+    <div class="gallery-row gallery-row--3">
         <div class="gallery-item">
             <img src="https://images.pexels.com/photos/36750260/pexels-photo-36750260/free-photo-of-delicious-grilled-chicken-wings-with-fries.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Wings" loading="lazy">
             <span class="gallery-label">Chicken Wings</span>
@@ -946,20 +937,12 @@
             <span class="gallery-label">Lahmacun</span>
         </div>
         <div class="gallery-item">
-            <img src="https://images.pexels.com/photos/3727243/pexels-photo-3727243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Burger" loading="lazy">
-            <span class="gallery-label">Burger</span>
-        </div>
-        <div class="gallery-item">
             <img src="https://images.pexels.com/photos/7405058/pexels-photo-7405058.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pide" loading="lazy">
             <span class="gallery-label">Pide</span>
         </div>
     </div>
-    <!-- Reihe 4: Hähnchen / Schnitzel / Nuggets -->
-    <div class="gallery-row gallery-row--3">
-        <div class="gallery-item">
-            <img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ganzes Hähnchen" loading="lazy">
-            <span class="gallery-label">Ganzes Hähnchen</span>
-        </div>
+    <!-- Reihe 4: Schnitzel / Nuggets -->
+    <div class="gallery-row gallery-row--2">
         <div class="gallery-item">
             <img src="https://images.pexels.com/photos/33859572/pexels-photo-33859572/free-photo-of-delicious-schnitzel-with-potatoes-and-sauce.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Schnitzel" loading="lazy">
             <span class="gallery-label">Schnitzel</span>
@@ -1072,14 +1055,6 @@
                 <div class="menu-item"><div><span class="menu-item-name">26. Pizzabrötchen gefüllt</span><span class="menu-item-desc">Nach Wahl</span></div><span class="menu-item-price">7,90 €</span></div>
 
                 <p class="menu-footer-note">Alle Preise inkl. MwSt. &nbsp;·&nbsp; Druckfehler, Irrtümer &amp; Preisänderungen vorbehalten</p>
-            </div>
-            <div class="family-deal reveal">
-                <div class="family-deal-title">Familienpizza Deal</div>
-                <p class="family-deal-text">
-                    <strong style="color:var(--gold-light)">Familienpizza</strong> ab 28,00 €<br>
-                    <strong style="color:var(--gold-light)">3 Pizzen kaufen</strong> &amp; 3 Getränke 0,33 l kostenlos<br>
-                    <strong style="color:var(--gold-light)">2 Familienpizzen kaufen</strong> &amp; 2×1 l Getränke kostenlos
-                </p>
             </div>
         </div>
 
@@ -1293,6 +1268,20 @@
 
     </div><!-- /container -->
 </section>
+
+<!-- ── FEATURED: BURGER & HÄHNCHEN ──────────── -->
+<div class="gallery">
+    <div class="gallery-row gallery-row--2">
+        <div class="gallery-item">
+            <img src="https://images.pexels.com/photos/3727243/pexels-photo-3727243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Burger" loading="lazy">
+            <span class="gallery-label">Burger</span>
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ganzes Hähnchen" loading="lazy">
+            <span class="gallery-label">Ganzes Hähnchen</span>
+        </div>
+    </div>
+</div>
 
 <!-- ── ALLERGENE ─────────────────────────────── -->
 <div class="allergene-section">
